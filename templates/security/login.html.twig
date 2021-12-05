@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{asset('style.css')}}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+          <!-- Tabs Titles -->
+          <h2 class="active"> Sign In </h2>
+      
+     
+            <!-- Login Form -->
+         <form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+            <input type="email" id="inputEmail" class="fadeIn second" value="{{ last_username }}" name="email" placeholder="login">
+            <input type="password" id="inputPassword" class="fadeIn third" name="password" placeholder="password">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+             <button id="submit" class="btn btn-lg btn-primary" type="submit">Sign in</button>
+            {#<input type="submit" class="fadeIn fourth" value="Log In">#}
+          </form>
+      
+          <!-- Remind Passowrd -->
+          <div id="formFooter">
+            <a class="underlineHover" href="#">Forgot Password?</a>
+          </div>
+      
+        </div>
+      </div>
+</body>
+</html>
